@@ -3,6 +3,8 @@ package football;
 public class Main {
 
     public static void main(String[] args) {
-	// write sasfasdfasdfdfakjkjsdfasSFASDkkjkjFsfsdfasdasdfassddASDyour code here
+        MemberPlayerHandler mph = new MemberPlayerHandler();
+        mph.initMemberPlayerList();
+        mph.printMemberPlayerList();
     }
 }
