@@ -29,7 +29,7 @@ class Menu {
             System.out.println(" 4 - Show all members/players sorted by team");
             System.out.println(" 5 - Show all members/players from team 1");
             System.out.println(" 6 - Show all members/players from team 2");
-            System.out.println(" 7 - Search for members/players within a timerange");
+            System.out.println(" 7 - Search for members/players within a age range");
             System.out.println(" 8 - Search for a member/player name");
             System.out.println(" 9 - Add a member/player");
             System.out.println("10 - Delete a member/player");

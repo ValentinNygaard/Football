@@ -50,24 +50,27 @@ public class LinkedList<E> {
         }
         return false;
     }
-
+/*
     public void add(E object){
-        int test;
-
+        ListNode<E> current;
+        current = back.prev;
+        current.next = new ListNode<>(object,back,back.prev);
+        back = current;
+        size++;
     }
-
+*/
     public void add(int index, E object){
         int test;
 
     }
-
+/*
     public void addAll(List<E> other) {
-        for (E value : other) {
-            add(value);
+        for (E obj : other) {
+            add(obj);
         }
 
     }
-
+*/
     public void remove(int index) {
         //checkIndex(index);
         ListNode<E> current = nodeAt(index - 1);
