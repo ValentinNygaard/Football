@@ -77,15 +77,15 @@ class MemberPlayerHandler {
         }
     }
 
-    void getAllMemberPlayers() {
+    void selectAllMemberPlayers() {
         currentList = memberPlayerList;
     }
 
-    int getCurrentSize() {
+    int getCurrentListSize() {
         return currentList.size();
     }
 
-    private void sortBy(int sortChoice) {
+    private void sortListBy(int sortChoice) {
         if (sortChoice == 1) {
             currentList.sort(Comparator.comparing(MemberPlayer::getFirstName));
         }
@@ -101,7 +101,7 @@ class MemberPlayerHandler {
     }
 
     void printCurrentList(int sortChoice, String headline) {
-        sortBy(sortChoice);
+        sortListBy(sortChoice);
         System.out.println(headline);
         System.out.println("--------------------------------------------------");
         System.out.println(String.format("%-20s%-20s%5s%5s","First Name","Last Name","Age","Team"));

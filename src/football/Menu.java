@@ -42,7 +42,7 @@ class Menu {
                 exitSystem = true;
             }
             else if (menuChoice > 0 && menuChoice < 5) {
-                mph.getAllMemberPlayers();
+                mph.selectAllMemberPlayers();
                 String[] heading = {"NO SORTING","ALL MEMBERS/PLAYERS SORTED BY FIRST NAME","ALL MEMBERS/PLAYERS SORTED BY LAST NAME","ALL MEMBERS/PLAYERS SORTED BY AGE","ALL MEMBERS/PLAYERS SORTED BY TEAM"};
                 mph.printCurrentList(menuChoice,heading[menuChoice]);
             }
