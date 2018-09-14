@@ -1,7 +1,7 @@
 Peter,Pan,32,1
 Arthur,Rimbaud,11,1
-Charles,Bourdelaire,29,1
-Fjodor,Dostojevski,16,2
+Charles,Baudelaire,29,1
+Fjodor,Dostoyevsky,16,2
 Knut,Hamsun,19,2
 Arthur,Clarke,13,2
 Robert,Heinlein,16,1
