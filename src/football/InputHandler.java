@@ -5,20 +5,18 @@ package football;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class InputHandler
-{
+public class InputHandler {
+
     // Simple String input - no checks
 
-    public static String getString()
-    {
+    public static String getString() {
         Scanner input = new Scanner(System.in);
         return input.nextLine();
     }
 
     // String input - only accepting inputs specified in ArrayList parameter
 
-    public static String getString(ArrayList<String> options, String errorMessage)
-    {
+    public static String getString(ArrayList<String> options, String errorMessage) {
         while(true)
         {
             String input = getString();
@@ -29,57 +27,57 @@ public class InputHandler
 
     // String input - only accepting inputs specified in Array parameter
 
-    public static String getString(String[] options, String errorMessage)
-    {
-        while(true)
-        {
+    public static String getString(String[] options, String errorMessage) {
+        while(true) {
             String input = getString();
-            for(String option : options)
-            {
+            for(String option : options) {
                 if(input.equals(option)) return input;
             }
             System.out.print(errorMessage);
         }
     }
 
-    public static int getInt(String errorMessage)
-    {
+    // Base int input - only check if int
+
+    public static int getInt(String typeErrorMessage) {
         Scanner input = new Scanner(System.in);
-        while(!input.hasNextInt())
-        {
+        while(!input.hasNextInt()) {
             input.nextLine();
-            System.out.print(errorMessage);
+            System.out.print(typeErrorMessage);
         }
         return input.nextInt();
     }
 
-    public static int getInt(int min, int max, String typeErrorMessage, String rangeErrorMessage)
-    {
-        while(true)
-        {
+    // int input - only accepting ints specified by min and max values
+
+    public static int getInt(int min, int max, String typeErrorMessage, String rangeErrorMessage) {
+        while(true) {
             int value = getInt(typeErrorMessage);
             if(value >= min && value <= max) return value;
             else System.out.print(rangeErrorMessage);
         }
     }
 
-    public static int getInt(ArrayList<Integer> options, String errorMessage, String valueErrorMessage)
-    {
-        while(true)
-        {
-            Integer value = (getInt(errorMessage));
+    // int input - only accepting ints specified in ArrayList parameter
+
+    public static int getInt(ArrayList<Integer> options, String typeErrorMessage, String valueErrorMessage) {
+        while(true) {
+            Integer value = (getInt(typeErrorMessage));
             if(options.contains(value)) return value;
             else System.out.print(valueErrorMessage);
         }
     }
 
-    public static int getInt(ArrayList<Integer> options, String errorMessage)
-    {
-        while(true)
-        {
-            Integer value = (getInt(errorMessage));
-            if(options.contains(value)) return value;
-            else System.out.print(errorMessage);
+    // int input - only accepting ints specified in Array parameter
+
+    public static int getInt(int[] options, String typeErrorMessage, String valueErrorMessage) {
+        while(true) {
+            int value = (getInt(typeErrorMessage));
+            for(int opt : options) {
+                if(opt == value) return value;
+            }
+            System.out.print(valueErrorMessage);
         }
     }
+
 }

@@ -5,11 +5,10 @@ import java.util.Scanner;
 
 class MemberPlayerHandler {
 
-    private List<MemberPlayer> memberPlayerList = new ArrayList<>();
-    private List<MemberPlayer> currentList = new ArrayList<>();
+    private List<MemberPlayer> memberPlayerList = new LinkedList<MemberPlayer>();
+    private List<MemberPlayer> currentList = new ArrayList<MemberPlayer>();
 
-    void initMemberPlayerList()
-    {
+    void initMemberPlayerList() {
         Scanner input = new Scanner(FileHandling.readFile("src/football/playerList.txt"));
         while (input.hasNextLine())
         {
@@ -21,14 +20,14 @@ class MemberPlayerHandler {
         }
     }
 
-    void saveMemberPlayerList()
-    {
-        String newDataString = memberPlayerList.get(0).getFirstName() + "," +  memberPlayerList.get(0).getLastName() + "," + memberPlayerList.get(0).getAge() + "," +  memberPlayerList.get(0).getTeam();
-        for (int i=1; i<memberPlayerList.size(); i++)
-        {
-            newDataString += "\n" + memberPlayerList.get(i).getFirstName() + "," +  memberPlayerList.get(i).getLastName() + "," + memberPlayerList.get(i).getAge() + "," +  memberPlayerList.get(i).getTeam();
+    void saveMemberPlayerList() {
+        StringBuilder sb = new StringBuilder();
+        for (MemberPlayer person : memberPlayerList) {
+            sb.append(person.toFileString());
+            sb.append("\n");
         }
-        FileHandling.writeFile(newDataString,"src/football/playerList.txt");
+        sb.deleteCharAt(sb.length()-1);
+        FileHandling.writeFile(sb.toString(),"src/football/playerList.txt");
     }
 
     void addMemberPlayer(String firstName,String lastName,int age,int team) {
@@ -42,7 +41,8 @@ class MemberPlayerHandler {
                 indexToDelete = memberPlayerList.indexOf(person);
             }
         }
-        if (indexToDelete > 0) {
+        if (indexToDelete >= 0) {
+            System.out.print(indexToDelete);
             memberPlayerList.remove(indexToDelete);
             return true;
         }
@@ -52,7 +52,6 @@ class MemberPlayerHandler {
     void searchTeam(int teamNumber) {
         currentList.clear();
         for (MemberPlayer person : memberPlayerList) {
-            System.out.print("-");
             if (person.getTeam() == teamNumber) {
                 currentList.add(person);
             }
@@ -78,14 +77,18 @@ class MemberPlayerHandler {
     }
 
     void selectAllMemberPlayers() {
-        currentList = memberPlayerList;
+        //currentList.addAll(memberPlayerList);
+        currentList.clear();
+        for (MemberPlayer person : memberPlayerList) {
+            currentList.add(person);
+        }
     }
 
     int getCurrentListSize() {
         return currentList.size();
     }
 
-    private void sortListBy(int sortChoice) {
+    void sortListBy(int sortChoice) {
         if (sortChoice == 1) {
             currentList.sort(Comparator.comparing(MemberPlayer::getFirstName));
         }
@@ -100,16 +103,13 @@ class MemberPlayerHandler {
         }
     }
 
-    void printCurrentList(int sortChoice, String headline) {
-        sortListBy(sortChoice);
-        System.out.println(headline);
-        System.out.println("--------------------------------------------------");
-        System.out.println(String.format("%-20s%-20s%5s%5s","First Name","Last Name","Age","Team"));
-        System.out.println("--------------------------------------------------");
+    String currentToString() {
+        StringBuilder sb = new StringBuilder();
         for (MemberPlayer person : currentList) {
-            System.out.println(person.toString());
+            sb.append(person.toString());
+            sb.append("\n");
         }
-        System.out.println("--------------------------------------------------");
-        System.out.println();
+        return sb.toString();
     }
+
 }

@@ -11,8 +11,7 @@ public class FileHandling {
 
     // Reading from file
 
-    public static String readFile(String fileName)
-    {
+    public static String readFile(String fileName) {
         String fileData = "";
         try
         {
@@ -32,8 +31,7 @@ public class FileHandling {
 
     // Writing to file
 
-    public static void writeFile(String newDataString, String fileName)
-    {
+    public static void writeFile(String newDataString, String fileName) {
         try
         {
             PrintStream output = new PrintStream(new File(fileName));

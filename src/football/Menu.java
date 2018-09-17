@@ -2,8 +2,10 @@ package football;
 
 class Menu {
 
-    static void userMenu() {
-        MemberPlayerHandler mph = new MemberPlayerHandler();
+    private MemberPlayerHandler mph = new MemberPlayerHandler();
+
+    void userMenu() {
+
         mph.initMemberPlayerList();
 
         int menuChoice;
@@ -44,15 +46,15 @@ class Menu {
             else if (menuChoice > 0 && menuChoice < 5) {
                 mph.selectAllMemberPlayers();
                 String[] heading = {"NO SORTING","ALL MEMBERS/PLAYERS SORTED BY FIRST NAME","ALL MEMBERS/PLAYERS SORTED BY LAST NAME","ALL MEMBERS/PLAYERS SORTED BY AGE","ALL MEMBERS/PLAYERS SORTED BY TEAM"};
-                mph.printCurrentList(menuChoice,heading[menuChoice]);
+                printCurrentList(menuChoice,heading[menuChoice]);
             }
             else if (menuChoice == 5) {
                 mph.searchTeam(1);
-                mph.printCurrentList(0,"MEMBERS/PLAYERS ON TEAM 1");
+                printCurrentList(0,"MEMBERS/PLAYERS ON TEAM 1");
             }
             else if (menuChoice == 6) {
                 mph.searchTeam(2);
-                mph.printCurrentList(0,"MEMBERS/PLAYERS ON TEAM 2");
+                printCurrentList(0,"MEMBERS/PLAYERS ON TEAM 2");
             }
             else if (menuChoice == 7) {
                 System.out.print("Please specify minimum age for range (10-35): ");
@@ -61,7 +63,7 @@ class Menu {
                 maxAge = InputHandler.getInt(minAge,35,"Only numbers allowed - Try again: ","Out of range - Try again: ");
                 System.out.println();
                 mph.searchAge(minAge,maxAge);
-                mph.printCurrentList(3,"MEMBERS/PLAYERS WITHIN AGE RANGE");
+                printCurrentList(3,"MEMBERS/PLAYERS WITHIN AGE RANGE");
             }
             else if (menuChoice == 8) {
                 System.out.print("Please specify first name: ");
@@ -70,7 +72,7 @@ class Menu {
                 lastName = InputHandler.getString();
                 System.out.println();
                 mph.searchName(firstName,lastName);
-                mph.printCurrentList(0,"MEMBER/PLAYER WITH SPECIFIED NAME");
+                printCurrentList(0,"MEMBER/PLAYER WITH SPECIFIED NAME");
             }
             else if (menuChoice == 9) {
                 System.out.print("Please specify first name: ");
@@ -110,4 +112,18 @@ class Menu {
         System.out.println("SAVING CHANGES TO MEMBERS/PLAYERS AND EXITING SYSTEM");
         System.out.println();
     }
+
+    private void printCurrentList(int sortChoice, String headline) {
+        mph.sortListBy(2);
+        mph.sortListBy(1);
+        mph.sortListBy(sortChoice);
+        System.out.println(headline + " (" + mph.getCurrentListSize() + ")");
+        System.out.println("--------------------------------------------------");
+        System.out.println(String.format("%-20s%-20s%5s%5s","First Name","Last Name","Age","Team"));
+        System.out.println("--------------------------------------------------");
+        System.out.print(mph.currentToString());
+        System.out.println("--------------------------------------------------");
+        System.out.println();
+    }
+
 }

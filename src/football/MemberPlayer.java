@@ -41,5 +41,8 @@ public class MemberPlayer {
     public String toString(){
         return String.format("%-20s%-20s%5d%5d", firstName, lastName, age, team);
     }
+    public String toFileString(){
+        return (firstName+","+lastName+","+age+","+team);
+    }
 }
 

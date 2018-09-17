@@ -1,10 +1,8 @@
 package football;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
-public class LinkedList<E> {
+public class LinkedList<E> implements List{
     private ListNode<E> front;
     private ListNode<E> back;
     private int size;
@@ -21,7 +19,7 @@ public class LinkedList<E> {
 
     public E get(int index) {
         ListNode<E> result = nodeAt(index);
-        return (E) result;
+        return (E) result.data;
     }
 
     public int indexOf(Object value) {
@@ -50,38 +48,48 @@ public class LinkedList<E> {
         }
         return false;
     }
-/*
-    public void add(E object){
-        ListNode<E> current;
-        current = back.prev;
-        current.next = new ListNode<>(object,back,back.prev);
-        back = current;
+
+    public boolean add(Object value){
+        ListNode<E> current = back.prev;
+        current.next = new ListNode<>();
+        current.next.data = value;
+        current.next.next = back;
+        current.next.prev = current;
+        back.prev = current.next;
+        size++;
+        return true;
+    }
+
+    public void add(int index, Object value){
+        ListNode<E> current = nodeAt(index - 1);
+        ListNode<E> after = current.next;
+        current.next = new ListNode<>();
+        current.next.data = value;
+        current.next.next = after;
+        current.next.prev = current;
+        back.prev = current.next;
         size++;
     }
-*/
-    public void add(int index, E object){
-        int test;
 
-    }
-/*
     public void addAll(List<E> other) {
         for (E obj : other) {
             add(obj);
         }
-
     }
-*/
-    public void remove(int index) {
+
+    public E remove(int index) {
         //checkIndex(index);
         ListNode<E> current = nodeAt(index - 1);
         current.next = current.next.next;
         current.next.prev = current;
         size--;
+        return (E) current;
     }
 
-    public void set(int index, E value) {
-        int test;
-
+    public E set(int index, Object value) {
+        ListNode<E> current = nodeAt(index);
+        current.data = (E) value;
+        return (E) current;
     }
 
     public void clear() {
@@ -89,7 +97,6 @@ public class LinkedList<E> {
         back.prev = front;
         size = 0;
     }
-
 
     private ListNode<E> nodeAt(int index) {
         ListNode<E> current;
@@ -107,8 +114,6 @@ public class LinkedList<E> {
         return current;
     }
 
-
-
     private class LinkedIterator implements Iterator<E> {
 
         private ListNode<E> current;
@@ -118,6 +123,7 @@ public class LinkedList<E> {
             current = front.next;
             removeOK = false;
         }
+
         public boolean hasNext() {
             return current != back;
         }
@@ -140,9 +146,61 @@ public class LinkedList<E> {
             prev2.next = prev2;
             size--;
             removeOK = false;
-
         }
     }
 
+    //@Override
+    public Iterator iterator() {
+        return new LinkedIterator();
+    }
+
+    @Override
+    public ListIterator listIterator(int index) {
+        return null;
+    }
+    @Override
+    public ListIterator listIterator() {
+        return null;
+    }
+    @Override
+    public List subList(int fromIndex, int toIndex) {
+        return null;
+    }
+    @Override
+    public int lastIndexOf(Object o) {
+        return 0;
+    }
+    @Override
+    public boolean retainAll(Collection c) {
+        return false;
+    }
+    @Override
+    public boolean removeAll(Collection c) {
+        return false;
+    }
+    @Override
+    public boolean addAll(int index, Collection c) {
+        return false;
+    }
+    @Override
+    public boolean addAll(Collection c) {
+        return false;
+    }
+    @Override
+    public boolean containsAll(Collection c) {
+        return false;
+    }
+    @Override
+    public boolean remove(Object o) {
+        return false;
+    }
+    @Override
+    public Object[] toArray() {
+        return new Object[0];
+    }
+    @Override
+    public Object[] toArray(Object[] a) {
+        return new Object[0];
+    }
 
 }
