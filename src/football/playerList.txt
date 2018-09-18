@@ -28,3 +28,4 @@ Bruce,Wayne,11,2
 Wonder,Woman,17,2
 Charles,Xavier,19,1
 Christian,Eriksen,24,1
+Andersine,And,18,1

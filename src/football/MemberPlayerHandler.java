@@ -42,7 +42,6 @@ class MemberPlayerHandler {
             }
         }
         if (indexToDelete >= 0) {
-            System.out.print(indexToDelete);
             memberPlayerList.remove(indexToDelete);
             return true;
         }
