@@ -78,7 +78,6 @@ public class LinkedList<E> implements List{
     }
 
     public E remove(int index) {
-        //checkIndex(index);
         ListNode<E> current = nodeAt(index - 1);
         current.next = current.next.next;
         current.next.prev = current;
@@ -149,7 +148,6 @@ public class LinkedList<E> implements List{
         }
     }
 
-    //@Override
     public Iterator iterator() {
         return new LinkedIterator();
     }
